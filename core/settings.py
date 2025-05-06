@@ -149,10 +149,19 @@ cloudinary.config(
     api_secret = os.getenv('CLOUDINARY_API_SECRET') 
 )
 
+#import dj_database_url
+#import os
+
+#DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
 import dj_database_url
 import os
 
-DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+    )
+}
+
 
 # Static files config
 STATIC_ROOT = BASE_DIR / 'staticfiles'
